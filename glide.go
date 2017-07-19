@@ -117,6 +117,20 @@ func main() {
 func commands() []cli.Command {
 	return []cli.Command{
 		{
+			Name:      "stale-check",
+			ShortName: "sc",
+			Usage:     "Checks if any versions can be updated.",
+			Description: `Glide will compare versions in a project's glide.yaml
+			file and compare it to its repo. If there are any differences, glide
+			will print a warning with the most recent version. For repos that
+			use semver tags, glide will print the most recent tagged version.
+			Otherwise, glide will print the most recent hash.`,
+			Action: func(c *cli.Context) error {
+				action.StaleCheck(".")
+				return nil
+			},
+		},
+		{
 			Name:      "create",
 			ShortName: "init",
 			Usage:     "Initialize a new project, creating a glide.yaml file",
